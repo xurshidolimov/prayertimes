@@ -54,10 +54,13 @@ async def send_message_user_3(message: types.Message, state: FSMContext):
     await state.update_data({'xabar': xabar})
 
     # foydalanuvchiga yuborish
-    data = await state.get_data()
-    id = data['id']
-    mess = data['xabar']
-    await bot.send_message(chat_id=id, text=mess)
+    try:
+        data = await state.get_data()
+        id = data['id']
+        mess = data['xabar']
+        await bot.send_message(chat_id=id, text=mess)
+    except:
+        await message.answer("<b>id</b> topilmadi")
 
     # adminga hisobot berish
     await message.answer("Xabar yuborildi")
