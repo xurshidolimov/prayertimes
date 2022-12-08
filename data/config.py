@@ -6,8 +6,8 @@ env = Env()
 env.read_env()
 
 # .env fayl ichidan quyidagilarni o'qiymiz
-BOT_TOKEN = env.str("BOT_TOKEN")  # Bot toekn
-ADMINS = env.list("ADMINS")  # adminlar ro'yxati
+BOT_TOKEN = "5473423088:AAH_f6Z1Tg-OtN6Y7BgoVm4BJUq3p3DNXfU"  # Bot toekn
+ADMINS = 679932311  # adminlar ro'yxati
 IP = env.str("ip")  # Xosting ip manzili
 
 DB_USER = env.str("DB_USER")
