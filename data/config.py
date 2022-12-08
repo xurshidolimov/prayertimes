@@ -11,7 +11,7 @@ ADMINS = 679932311  # adminlar ro'yxati
 IP = 'localhost'  # Xosting ip manzili
 
 DB_USER = 'prayertimes'
-DB_PASS = 'xurshid_olimov'
+DB_PASS = 'turkiston'
 DB_NAME = 'prayertimes'
 DB_HOST = 'localhost'
 
