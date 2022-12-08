@@ -7,7 +7,7 @@ env.read_env()
 
 # .env fayl ichidan quyidagilarni o'qiymiz
 BOT_TOKEN = "5473423088:AAH_f6Z1Tg-OtN6Y7BgoVm4BJUq3p3DNXfU"  # Bot toekn
-ADMINS = 679932311  # adminlar ro'yxati
+ADMINS = '679932311'  # adminlar ro'yxati
 IP = 'localhost'  # Xosting ip manzili
 
 DB_USER = 'prayertimes'
