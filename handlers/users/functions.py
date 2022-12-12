@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup as BS
 
 
-def times(city, month, day):
+async def times(city, month, day):
     t = requests.get(f'https://islom.uz/vaqtlar/{city}/{month}')
     html_t = BS(t.content, 'html.parser')
     for el in html_t.select('#large_screen'):
@@ -14,7 +14,7 @@ def times(city, month, day):
                 "shom": time[-12:-7],
                 "xufton": time[-6: -1]}
 
-def city_code(city):
+async def city_code(city):
     cities = {
     "Toshkent": 27,
     "Andijon": 1,

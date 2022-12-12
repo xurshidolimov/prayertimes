@@ -12,10 +12,10 @@ async def today_prayertimes(message: types.Message):
     # foydalanuvchi manzilini aniqash
     user = await db.select_user(telegram_id=message.from_user.id)
     user_address = user[2]
-    user_address_id = city_code(user_address)
+    user_address_id = await city_code(user_address)
 
     # namoz vaqtlar
-    result = times(user_address_id, month_now, day_now)
+    result = await times(user_address_id, month_now, day_now)
     bomdod = result['bomdod']
     quyosh = result['quyosh']
     peshin = result['peshin']
@@ -42,15 +42,16 @@ async def week_prayertimes(message: types.Message):
     # foydalanuvchi manzilini aniqlash
     user = await db.select_user(telegram_id=message.from_user.id)
     user_address = user[2]
-    user_address_id = city_code(user_address)
+    user_address_id = await city_code(user_address)
 
     # xabarni tayyorlash va yuborish
-    await message.answer('⌛ ')
+
+    m = await message.answer('⌛ ')
     txt = f'<b>{user_address}</b> shahri vaqti bilan\n{message.text}\n\n'
     for n in range(1, 8):
         d = datetime.datetime.today() + datetime.timedelta(days=n-1)
         day, month, year = d.day, d.month, d.year
-        result = times(user_address_id, month, day)
+        result = await times(user_address_id, month, day)
 
         bomdod = result['bomdod']
         quyosh = result['quyosh']
@@ -68,6 +69,9 @@ async def week_prayertimes(message: types.Message):
             f'🌃 <b>{xufton}</b>     Xufton\n\n'
     txt += '@namoz_vaqtii_bot'
     await message.answer(txt)
+    await m.delete()
+
+
 
 
 @dp.message_handler(text="📍 Hududni o'zgartirish")
@@ -79,12 +83,12 @@ async def update_address(message: types.Message):
 async def prayertimes(message: types.Message):
     try:
         # foydalanuvchini adresini saqlash
-        rest = city_code(message.text)
+        rest = await city_code(message.text)
         await db.update_user_address(telegram_id=message.from_user.id, Address=message.text)
 
 
         # namoz vaqtlar
-        result = times(rest, month_now, day_now)
+        result = await times(rest, month_now, day_now)
         bomdod = result['bomdod']
         quyosh = result['quyosh']
         peshin = result['peshin']
