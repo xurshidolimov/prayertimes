@@ -1,9 +1,9 @@
 import datetime
 from aiogram import types
 from keyboards.default.main import main, city
-from loader import dp, db, bot
+from loader import dp, db
 from .functions import times, city_code
-from data.config import month_now, day_now, year_now
+
 
 
 
@@ -15,7 +15,7 @@ async def today_prayertimes(message: types.Message):
     user_address_id = await city_code(user_address)
 
     # namoz vaqtlar
-    result = await times(user_address_id, month_now, day_now)
+    result = await times(user_address_id, datetime.datetime.now().month, datetime.datetime.now().day)
     bomdod = result['bomdod']
     quyosh = result['quyosh']
     peshin = result['peshin']
@@ -24,7 +24,7 @@ async def today_prayertimes(message: types.Message):
     xufton = result['xufton']
 
     # foydalanuvchida xabar yuborish
-    await message.answer(f'{day_now}.{month_now}.{year_now}\n\n'
+    await message.answer(f'{datetime.datetime.now().day}.{datetime.datetime.now().month}.{datetime.datetime.now().year}\n\n'
                          f'<b>{user_address}</b> shahri vaqti bilan\n{message.text}\n\n'
                          f'🌅 {bomdod}     Bomdod<i> (saharlik)</i>\n\n'
                          f'🌞 {quyosh}     Quyosh chiqishi\n\n'
@@ -88,7 +88,7 @@ async def prayertimes(message: types.Message):
 
 
         # namoz vaqtlar
-        result = await times(rest, month_now, day_now)
+        result = await times(rest, datetime.datetime.now().month, datetime.datetime.now().day)
         bomdod = result['bomdod']
         quyosh = result['quyosh']
         peshin = result['peshin']
@@ -97,7 +97,7 @@ async def prayertimes(message: types.Message):
         xufton = result['xufton']
 
         # xabarni foydalanuvchiga yuborish
-        await message.answer(f'{day_now}.{month_now}.{year_now}\n\n'
+        await message.answer(f'{datetime.datetime.now().day}.{datetime.datetime.now().month}.{datetime.datetime.now().year}\n\n'
                              f'<b>{message.text} vaqti bilan namoz vaqtlari</b>\n\n'
                              f'🌅 {bomdod}     Bomdod<i> (saharlik)</i>\n\n'
                              f'🌞 {quyosh}     Quyosh chiqishi\n\n'
