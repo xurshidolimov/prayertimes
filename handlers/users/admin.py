@@ -18,9 +18,17 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(text="🔋 Ma'lumotlar ombori", user_id=ADMINS)
 async def get_all_users(message: types.Message):
-    await message.answer("Ushbu funksiya endi qo'shiladi")
-    # users = await db.select_all_users()
-    # await message.answer(str(users))
+    users = await db.select_all_users()
+    count = await db.count_users()
+    txt = ''
+    for n in range(0, count):
+        id = users[n][0]
+        name = users[n][1]
+        address = users[n][2]
+        telegram_id = users[n][3]
+        txt += f'{id}. <b>{name}</b> <i>{address}</i> {telegram_id}\n'
+
+    await message.answer(txt)
 
 @dp.message_handler(text="📊 Foydalanuvchilar soni", user_id=ADMINS)
 async def count(message: types.Message):
